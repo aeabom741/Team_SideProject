@@ -1,3 +1,4 @@
+from time import time
 import pandas as pd
 import requests
 
@@ -28,14 +29,25 @@ dict["records"]["locations"][0]["location"][0]["weatherElement"]
 # 13    WD                      風向
 # 14    Td                      平均露點溫度
 
-
-level_1 = dict["records"]["locations"][0]["location"][0]["weatherElement"]
-for i in level_1:
-    print(i["elementName"],i["description"])
+# 正式版
+city_level = dict["records"]["locations"][0]["location"]
+for i in city_level:
+    # print(i["locationName"])
+    city_name = i["locationName"]
+    weatherElement_level = i["weatherElement"]
+    for s in weatherElement_level:
+        # print(s["description"])
+        weather_element = s["description"]
+        time_level = s["time"]
+        for m in time_level:
+            start_time = m["startTime"]
+            end_time = m["endTime"]
+            value_for_data = m["elementValue"][0]["value"]
+            
 
 df_PoP12h = pd.DataFrame(columns=["start_time", "end_time", "pecentage"])
 
-for i in level_1[0]["time"]:
+for i in city_level[0]["time"]:
     # print(i)
     start_time = i["startTime"]
     end_time = i["endTime"]
