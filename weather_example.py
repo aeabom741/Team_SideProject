@@ -80,3 +80,5 @@ def get_weather_weekly_forecast(path):
     results = results.reset_index(drop=True)
     results.to_csv(path + '/r.csv', index=False)
     return results
+
+get_weather_weekly_forecast()
