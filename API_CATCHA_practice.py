@@ -1,4 +1,3 @@
-from time import time
 import pandas as pd
 import requests
 
@@ -30,6 +29,7 @@ dict["records"]["locations"][0]["location"][0]["weatherElement"]
 # 14    Td                      平均露點溫度
 
 # 正式版
+df = pd.DataFrame(columns=["Location Name", "Weather Element", "Start Time", "End Time", "Value"])
 city_level = dict["records"]["locations"][0]["location"]
 for i in city_level:
     # print(i["locationName"])
@@ -43,16 +43,9 @@ for i in city_level:
             start_time = m["startTime"]
             end_time = m["endTime"]
             value_for_data = m["elementValue"][0]["value"]
+            df.loc[len(df)] = [city_name, weather_element, start_time, end_time, value_for_data]
+
             
-
-df_PoP12h = pd.DataFrame(columns=["start_time", "end_time", "pecentage"])
-
-for i in city_level[0]["time"]:
-    # print(i)
-    start_time = i["startTime"]
-    end_time = i["endTime"]
-    PoP12h = i["elementValue"][0]["value"]+"%"
-    df_PoP12h.loc[len(df_PoP12h)] = [start_time, end_time, PoP12h]
 
 
 
