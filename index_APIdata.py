@@ -18,5 +18,8 @@ weather_data = input("請輸入要查詢的天氣資料: ")
 data = dict["records"]["locations"][0]["location"][city_dict[Counties]]["weatherElement"][weatherElement_dict[weather_data]]["time"]
 
 for i in data:
-    print(i["startTime"], i["endTime"], i["elementValue"][0]["value"]+measure_dict[i["elementValue"][0]["measures"]])
+    if weather_data in ["最小舒適度指數", "最大風速", "最大舒適度指數", "紫外線指數"]:
+        print(i["startTime"], i["endTime"], i["elementValue"][1]["value"]+measure_dict[i["elementValue"][1]["measures"]])
+    else:
+        print(i["startTime"], i["endTime"], i["elementValue"][0]["value"]+measure_dict[i["elementValue"][0]["measures"]])
 
