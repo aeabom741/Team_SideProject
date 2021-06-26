@@ -1,7 +1,6 @@
 from email.mime import multipart
 import smtplib
 from email.mime.multipart import MIMEMultipart
-from email.header import Header
 from email.mime.text import MIMEText
 
 
@@ -18,7 +17,7 @@ content["to"] = "aeabom741@gmail.com"
 
 # Title
 subject = "Python SMTP Email"
-content["Subject"] = Header(subject,'utf-8')
+content["Subject"] = subject
 
 
 att_1 = MIMEText(open('美國大盤.csv','rb').read(),'base64','utf-8')
