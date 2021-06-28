@@ -22,4 +22,3 @@ for i in data:
         print(i["startTime"], i["endTime"], i["elementValue"][1]["value"]+measure_dict[i["elementValue"][1]["measures"]])
     else:
         print(i["startTime"], i["endTime"], i["elementValue"][0]["value"]+measure_dict[i["elementValue"][0]["measures"]])
-
