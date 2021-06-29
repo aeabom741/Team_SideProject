@@ -1,17 +1,19 @@
+import sys
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+sys.path.append("/Users/shijunliao/Desktop/Python/side_project/weather")
+import config as cfg
 
 
 content = MIMEMultipart() # 建立MIMEMultipart物件
 
-
 """
 Creat email content
 """
-content["from"] = "andyliao0413@gmail.com"          #寄件者
-content["to"] = "qz61561129@gmail.com"              #收件者
-content["subject"] = "Python SMTP Email"            #郵件標題
+content["from"] = cfg.config["Gmail"]["Andy"]["account"]
+content["to"] = cfg.config["Gmail"]["Andy_trial"]["account"]
+content["subject"] = "Python SMTP Email"
 content.attach(MIMEText(open("/Users/shijunliao/Desktop/Python/side_project/weather/mail.txt",'r').read()))  #郵件內容
 
 # attach 附件
@@ -22,6 +24,8 @@ content.attach(att_1)
 """
 Try connect SMTP Server
 """
+account = cfg.config["Gmail"]["Andy"]["account"]
+password = cfg.config["Gmail"]["Andy"]["password"]
 
 with smtplib.SMTP(host='smtp.gmail.com',port="587") as smtp:
     try:
@@ -33,7 +37,7 @@ with smtplib.SMTP(host='smtp.gmail.com',port="587") as smtp:
         smtp.starttls()
 
         #login sender email
-        smtp.login("andyliao0413@gmail.com", "jiarbyfdpxpdhiah")
+        smtp.login(account, password)
         print("Login successed")
 
         #Send the mail
